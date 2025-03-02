@@ -17,6 +17,7 @@ class Menu(models.Model):
     name = models.CharField(max_length=200)
     price = models.IntegerField()
     description = models.TextField(max_length=1000, default="")
+    image = models.ImageField(upload_to='menu_items/', null=True, blank=True)
 
     def __str__(self):
         return self.name

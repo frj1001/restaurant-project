@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import BookingForm
 from .models import Menu
 
@@ -12,11 +12,14 @@ def about(request):
     return render(request, 'about.html')
 
 def book(request):
-    form = BookingForm()
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('book')
+    else:
+        form = BookingForm()
+            
     context = {'form':form}
     return render(request, 'book.html', context)
 
