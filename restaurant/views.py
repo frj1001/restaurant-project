@@ -1,8 +1,7 @@
-from django.shortcuts import render 
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.shortcuts import render, redirect
 from .forms import BookingForm
 from .models import Menu
+import time
 
 
 # Create your views here.
@@ -18,7 +17,8 @@ def book(request):
         form = BookingForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('book'))
+            time.sleep(1)
+            return redirect('book')
     else:
         form = BookingForm()
             
