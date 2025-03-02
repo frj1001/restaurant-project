@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
-from django.views.decorators.cache import never_cache
+from django.shortcuts import render 
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .forms import BookingForm
 from .models import Menu
 
 
 # Create your views here.
-@never_cache
+
 def home(request):
     return render(request, 'index.html')
 
@@ -17,7 +18,7 @@ def book(request):
         form = BookingForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('book')
+            return HttpResponseRedirect(reverse('book'))
     else:
         form = BookingForm()
             
